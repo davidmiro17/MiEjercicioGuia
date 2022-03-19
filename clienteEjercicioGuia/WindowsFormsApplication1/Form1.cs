@@ -57,7 +57,7 @@ namespace WindowsFormsApplication1
                     mensaje = Encoding.ASCII.GetString(msg2).Split('\0')[0];
                     MessageBox.Show("La longitud de tu nombre es: " + mensaje);
                 }
-                else
+                else if (Bonito.Checked)
                 {
                     // Quiere saber si el nombre es bonito
                     string mensaje = "2/" + nombre.Text;
@@ -78,7 +78,32 @@ namespace WindowsFormsApplication1
 
 
                 }
-             
+
+                else
+                {
+                    string mensaje = "3/" + nombre.Text + "/" + altura.Text;
+                    // Enviamos al servidor el nombre tecleado
+                    byte[] msg = System.Text.Encoding.ASCII.GetBytes(mensaje);
+                    server.Send(msg);
+
+                    //Recibimos la respuesta del servidor
+                    byte[] msg2 = new byte[80];
+                    server.Receive(msg2);
+                    mensaje = Encoding.ASCII.GetString(msg2).Split('\0')[0];
+
+
+
+                    if (mensaje == "eres alto")
+                        MessageBox.Show("Eres alto.");
+                    else
+                        MessageBox.Show("No eres alto. Lo siento.");
+
+
+                }
+
+
+
+
                 // Se terminó el servicio. 
                 // Nos desconectamos
                 this.BackColor = Color.Gray;
@@ -103,8 +128,29 @@ namespace WindowsFormsApplication1
 
         }
 
-   
+        private void groupBox1_Enter(object sender, EventArgs e)
+        {
 
-     
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label1_Click_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label3_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void radioButton1_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }
